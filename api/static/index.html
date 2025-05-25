@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>LLM Demo</title>
+    <style>
+      body {
+        font-family: system-ui;
+        margin: 2rem;
+        max-width: 700px;
+      }
+      textarea {
+        width: 100%;
+        height: 6rem;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 1rem;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LLM Chat</h1>
+    <textarea id="prompt" placeholder="Type your question…"></textarea><br />
+    <button onclick="send()">Send</button>
+    <pre id="resp"></pre>
+
+    <script>
+      async function send() {
+        const r = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: prompt.value, max_tokens: 128 }),
+        });
+        const j = await r.json();
+        document.getElementById("resp").textContent =
+          j.choices?.[0]?.message?.content || JSON.stringify(j, null, 2);
+      }
+    </script>
+  </body>
+</html>
