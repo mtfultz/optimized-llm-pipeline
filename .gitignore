@@ -1,4 +1,9 @@
 data/raw
-models/
 *.deb
 .env
+merged-llama3/
+out-lora/
+models/
+*.safetensors
+*.pt
+*.bin
