@@ -24,7 +24,3 @@ open http://localhost:8080  # GUI
 ![image](https://github.com/user-attachments/assets/903bb9f4-6490-410d-a955-5e36ffc49b06)
 
 
-
-Live tunnel: https://yearly-july-watson-maintaining.trycloudflare.com/
-
-
