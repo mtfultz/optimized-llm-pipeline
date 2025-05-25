@@ -2,16 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>LLM Demo</title>
+    <title>LLM Chat Demo</title>
     <style>
       body {
-        font-family: system-ui;
+        font-family: system-ui, sans-serif;
         margin: 2rem;
-        max-width: 700px;
+        max-width: 720px;
+      }
+      h1 {
+        margin-top: 0;
       }
       textarea {
         width: 100%;
-        height: 6rem;
+        height: 7rem;
+      }
+      label {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+      input[type="number"] {
+        width: 3.5rem;
+      }
+      button {
+        margin: 0.75rem 0;
+        padding: 0.4rem 1.2rem;
       }
       pre {
         background: #f4f4f4;
@@ -20,22 +34,58 @@
       }
     </style>
   </head>
+
   <body>
-    <h1>LLM Chat</h1>
-    <textarea id="prompt" placeholder="Type your question…"></textarea><br />
+    <h1>LLM Chat Demo</h1>
+
+    <textarea id="prompt" placeholder="Ask me something…"></textarea><br />
+
+    <!-- Decoding controls -->
+    <div>
+      <label
+        >T° <input id="t" type="number" min="0" max="2" step="0.1" value="0.6"
+      /></label>
+      <label
+        >top-p
+        <input id="p" type="number" min="0" max="1" step="0.05" value="0.9"
+      /></label>
+      <label
+        >rep-pen
+        <input id="r" type="number" min="1" max="2" step="0.1" value="1.2"
+      /></label>
+    </div>
+
     <button onclick="send()">Send</button>
+
     <pre id="resp"></pre>
 
     <script>
       async function send() {
-        const r = await fetch("/chat", {
+        const promptBox = document.getElementById("prompt");
+        const temperature = parseFloat(document.getElementById("t").value);
+        const top_p = parseFloat(document.getElementById("p").value);
+        const rep_pen = parseFloat(document.getElementById("r").value);
+
+        // build request body
+        const body = {
+          prompt: promptBox.value,
+          max_tokens: 128,
+          temperature,
+          top_p,
+          repetition_penalty: rep_pen,
+        };
+
+        // POST to FastAPI proxy (/chat)
+        const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: prompt.value, max_tokens: 128 }),
+          body: JSON.stringify(body),
         });
-        const j = await r.json();
-        document.getElementById("resp").textContent =
-          j.choices?.[0]?.message?.content || JSON.stringify(j, null, 2);
+
+        const json = await res.json();
+        const out =
+          json?.choices?.[0]?.message?.content || JSON.stringify(json, null, 2);
+        document.getElementById("resp").textContent = out;
       }
     </script>
   </body>
