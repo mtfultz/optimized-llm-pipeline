@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: llama3-vllm
+    runtime: nvidia
+    shm_size: "2g"
+    restart: unless-stopped
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_READ_TOKEN:-}
+    volumes:
+      - ./merged-llama3:/workspace/model
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: >
+      --model /workspace/model
+      --served-model-name merged-llama3
+      --dtype float16
+      --gpu-memory-utilization 0.9
+      --max-model-len 8192
+      --max-num-seqs 128
+
+  api:
+    build: ./api
+    container_name: llama3-proxy
+    depends_on: [vllm]
+    environment:
+      - INFER_URL=http://vllm:8000/v1/chat/completions
+      - MODEL_ID=merged-llama3
+    ports:
+      - "8080:8000"
