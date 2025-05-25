@@ -1,4 +1,3 @@
-# scripts/merge_lora.py
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
@@ -9,7 +8,7 @@ OUTDIR  = "merged-llama3"
 # 1. load base entirely on GPU-0
 base = AutoModelForCausalLM.from_pretrained(
         BASE,
-        device_map={"": 0},          # everything on the 4090
+        device_map={"": 0},         
         torch_dtype="float16",
         trust_remote_code=True,
 )
