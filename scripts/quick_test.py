@@ -2,18 +2,6 @@
 """
 quick_test.py  –  tiny CLI to sanity-check a merged / quantised Llama-3 model
 
-Examples
---------
-# test the fp16 merge on the 4090
-python scripts/quick_test.py \
-        -m merged-llama3 \
-        -p "How is fire-barrier penetration PI3480864 evaluated?"
-
-# test a 4-bit GPTQ export
-python scripts/quick_test.py \
-        -m models/llama3-8b-gptq \
-        -p "Summarise NRC Generic Letter 86-10" \
-        --temperature 0.2 --max_new_tokens 192
 """
 import argparse, torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
@@ -38,7 +26,7 @@ def main() -> None:
     tok = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(
                 args.model,
-                device_map={"": 0},          # single-GPU (4090) test
+                device_map={"": 0},          
                 torch_dtype=dtype,
                 trust_remote_code=True,
             )

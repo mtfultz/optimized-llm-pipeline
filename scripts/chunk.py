@@ -6,7 +6,7 @@ RAW   = pathlib.Path("data/raw")
 PROC  = pathlib.Path("data/processed"); PROC.mkdir(parents=True, exist_ok=True)
 OUT   = PROC / "chunks.jsonl"
 
-def chunk_text(txt, width=3000):            # ~1000 tokens
+def chunk_text(txt, width=3000):            
     return textwrap.wrap(txt, width)
 
 with OUT.open("w", encoding="utf-8") as f_out:
