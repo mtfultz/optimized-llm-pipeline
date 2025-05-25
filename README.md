@@ -21,7 +21,8 @@ open http://localhost:8080  # GUI
 | Throughput            | **42 tok/s** |
 | VRAM                  | **15.8 GB**  |
 
-![image](https://github.com/user-attachments/assets/196032c1-a70a-47cf-bec1-145154c98c87)
+![image](https://github.com/user-attachments/assets/903bb9f4-6490-410d-a955-5e36ffc49b06)
+
 
 
 Live tunnel: https://yearly-july-watson-maintaining.trycloudflare.com/
