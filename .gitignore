@@ -1,0 +1,4 @@
+.envdata/raw
+models/
+*.deb
+.env
