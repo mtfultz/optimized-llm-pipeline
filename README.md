@@ -1,5 +1,4 @@
 <!-- 🚀 QUICK STATUS BADGES -->
-[![CI](https://github.com/mtfultz/optimized-llm-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/mtfultz/optimized-llm-pipeline/actions/workflows/ci.yml)
 ![MIT License](https://img.shields.io/github/license/mtfultz/optimized-llm-pipeline)
 ![Docker (image size)](https://img.shields.io/docker/image-size/library/python/3.11-slim?label=api%20image)
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
