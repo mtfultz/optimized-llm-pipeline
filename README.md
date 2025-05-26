@@ -22,7 +22,7 @@ open http://localhost:8080  # GUI
 
 ![image](https://github.com/user-attachments/assets/903bb9f4-6490-410d-a955-5e36ffc49b06)
 
-Example Usage:
-“Summarise in two sentences the Heat-Affected-Zone Review findings for penetration PI3480864.”
-“List every interim compensatory measure proposed for Dresden’s Turbine Building in the 1984 Appendix R exemption request.”
+Example Usage:<br>
+“Summarise in two sentences the Heat-Affected-Zone Review findings for penetration PI3480864.”<br>
+“List every interim compensatory measure proposed for Dresden’s Turbine Building in the 1984 Appendix R exemption request.”<br>
 “Compare the fire-detection coverage on Side 1 versus Side 2 for penetration PI3350820.”
