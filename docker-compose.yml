@@ -8,14 +8,14 @@ services:
     shm_size: "2g"
     restart: unless-stopped
     environment:
-      - HUGGING_FACE_HUB_TOKEN=${HF_READ_TOKEN:-}
+      - HUGGING_FACE_HUB_TOKEN=${HF_READ_TOKEN}
     volumes:
       - ./merged-llama3:/workspace/model
       - ~/.cache/huggingface:/root/.cache/huggingface
     ports:
       - "8000:8000"
     command: >
-      --model /workspace/model
+      --model ${MODEL_ID}
       --served-model-name merged-llama3
       --dtype float16
       --gpu-memory-utilization 0.9
